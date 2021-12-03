@@ -6,7 +6,7 @@
 /*   By: ykot <ykot@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 22:14:55 by ykot              #+#    #+#             */
-/*   Updated: 2021/12/01 00:29:06 by ykot             ###   ########.fr       */
+/*   Updated: 2021/12/03 02:57:05 by ykot             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 # include <unistd.h> 
 # include <stdlib.h>
 # include <fcntl.h>
-# define BUFF_SIZE 10000000
+# define BUFF_SIZE 1
 
 int		get_next_line(const int fd, char **line);
+
+char	*ft_strdup(const char *s1);
+char	*ft_strcpy(char *dst, const char *src);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
 char	*ft_strnew(size_t size);
 void	ft_strdel(char **as);
-char	*ft_strcpy(char *dst, const char *src);
+void	ft_strclr(char *s);
+char	*ft_strsub(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
