@@ -6,7 +6,7 @@
 /*   By: ykot <ykot@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 22:14:57 by ykot              #+#    #+#             */
-/*   Updated: 2021/12/03 02:46:39 by ykot             ###   ########.fr       */
+/*   Updated: 2021/12/06 18:57:16 by ykot             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	ft_newline(char **line, char **str, int *result)
 {
-	char 	*newl;
+	char	*newl;
 	char	*temp;
-	
+
 	*result = 0;
 	newl = ft_strchr(*str, '\n');
 	if (newl)
@@ -41,10 +41,10 @@ static void	ft_newline(char **line, char **str, int *result)
 	}
 }
 
-static int ft_alloc_buf(char **str, char **buf)
+static int	ft_alloc_buf(char **str, char **buf)
 {
 	char	*temp;
-	
+
 	if (*str)
 	{
 		temp = ft_strjoin(*str, *buf);
@@ -63,21 +63,21 @@ static int ft_alloc_buf(char **str, char **buf)
 	}
 }
 
-static void ft_clr_and_read_buf (int fd, int *ret, char **buf)
+static void	ft_clr_and_read_buf(int fd, int *ret, char **buf)
 {
 	ft_strclr(*buf);
 	*ret = read(fd, *buf, BUFF_SIZE);
 }
 
-static int ft_ret(int fd, char **str, char **line, int *result)
+static int	ft_ret(int fd, char **str, char **line, int *result)
 {
 	char	*buf;
 	int		ret;
-	
+
 	buf = ft_strnew(BUFF_SIZE);
 	if (!buf)
 		return (-1);
-	ret = read(fd, buf, BUFF_SIZE);	
+	ret = read(fd, buf, BUFF_SIZE);
 	if (ret == -1)
 		return (-1);
 	while (ret)
@@ -90,7 +90,7 @@ static int ft_ret(int fd, char **str, char **line, int *result)
 			ft_strdel(&buf);
 			return (*result);
 		}
-		ft_clr_and_read_buf (fd, &ret, &buf);
+		ft_clr_and_read_buf(fd, &ret, &buf);
 		if (ret == -1)
 			return (-1);
 	}
@@ -100,10 +100,10 @@ static int ft_ret(int fd, char **str, char **line, int *result)
 
 int	get_next_line(const int fd, char **line)
 {
-	static char	*str[1024];
+	static char	*str[10241];
 	int			result;
-	
-	if (fd == -1 || fd == 1 || fd > 65535)
+
+	if (fd < 0 || fd > 10240 || BUFF_SIZE <= 0 || !line)
 		return (-1);
 	if (str[fd])
 	{	
@@ -111,10 +111,10 @@ int	get_next_line(const int fd, char **line)
 		if (result)
 			return (result);
 	}
-	result = ft_ret(fd, &(str[fd]), line , &result);
+	result = ft_ret(fd, &(str[fd]), line, &result);
 	if (result)
 		return (result);
-	if (str[fd])
+	if (str[fd] && ft_strlen(str[fd]))
 	{
 		*line = str[fd];
 		str[fd] = NULL;

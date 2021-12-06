@@ -6,7 +6,7 @@
 /*   By: ykot <ykot@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 22:14:55 by ykot              #+#    #+#             */
-/*   Updated: 2021/12/03 02:57:05 by ykot             ###   ########.fr       */
+/*   Updated: 2021/12/06 18:57:22 by ykot             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 # define GET_NEXT_LINE_H
 # include <unistd.h> 
 # include <stdlib.h>
-# include <fcntl.h>
-# define BUFF_SIZE 1
+# define BUFF_SIZE 32
 
 int		get_next_line(const int fd, char **line);
-
 char	*ft_strdup(const char *s1);
 char	*ft_strcpy(char *dst, const char *src);
 size_t	ft_strlen(const char *s);
